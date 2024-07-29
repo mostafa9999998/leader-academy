@@ -37,7 +37,6 @@ dependencies:
   cupertino_icons: ^1.0.6
   youtube_player_flutter: ^9.0.1
   flutter_inappwebview: ^6.0.0
-  #syncfusion_flutter_pdfviewer: ^26.1.38
   pdfx: ^2.6.0
   flutter_pdfview: ^1.2.3
   internet_file: ^1.2.0

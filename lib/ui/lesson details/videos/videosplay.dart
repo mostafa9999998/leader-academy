@@ -11,7 +11,7 @@ class YoutubePlayVideoScreen extends StatefulWidget {
 
 class _YoutubePlayVideoScreenState extends State<YoutubePlayVideoScreen> {
   late YoutubePlayerController _controller;
-  final String _videoUrl = 'https://youtu.be/3vJ-nHTX9iI';
+  //final String _videoUrl = 'https://youtu.be/3vJ-nHTX9iI';
 
   @override
   void initState() {

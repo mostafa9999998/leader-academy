@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leader_academy/ui/lesson%20details/videos/videosplay.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoWedget extends StatefulWidget {
    VideoWedget({super.key,required this.materialmodel});
@@ -51,7 +51,7 @@ class _VideoWedgetState extends State<VideoWedget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => YoutubePlayVideoScreen(videoUrl:'https://youtu.be/vJsbt6X1keQ' ),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => YoutubePlayVideoScreen(videoUrl:widget.materialmodel.url ),));
             },
             child: Container(
               height: MediaQuery.of(context).size.height*0.2,
