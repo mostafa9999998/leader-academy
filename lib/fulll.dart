@@ -9,27 +9,6 @@ class MacAddressWidget extends StatefulWidget {
 }
 
 class _MacAddressWidgetState extends State<MacAddressWidget> {
-  // static const platform = MethodChannel('samples.flutter.dev/macAddress');
-  // String _macAddress = 'Unknown';
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _getMacAddress();
-  // }
-  //
-  // Future<void> _getMacAddress() async {
-  //   String macAddress;
-  //   try {
-  //     macAddress = await platform.invokeMethod('getMacAddress');
-  //   } on PlatformException catch (e) {
-  //     macAddress = "Failed to get MAC address: '${e.message}'.";
-  //   }
-  //
-  //   setState(() {
-  //     _macAddress = macAddress;
-  //   });
-  // }
 
 
   Future<String?> getMacAddress() async {

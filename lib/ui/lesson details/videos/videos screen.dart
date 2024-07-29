@@ -9,8 +9,8 @@ class VideosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
    List<vediosmodel> materialmodellist = [
-     vediosmodel(url: 'https://youtu.be/3vJ-nHTX9iI',name: 'video 1'),
-     vediosmodel(url: 'https://drive.google.com/file/d/1Qbek2mC9jtb0YSr5_J9-acu8CPs-e9x0/view',name: 'video 2'),
+     vediosmodel(url: 'https://youtu.be/vJsbt6X1keQ',name: 'video 1'),
+     vediosmodel(url: 'https://youtu.be/3vJ-nHTX9iI',name: 'video 2'),
    ];
 
     return Scaffold(

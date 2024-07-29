@@ -51,7 +51,7 @@ class _VideoWedgetState extends State<VideoWedget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => YoutubePlayVideoScreen(videoUrl: 'https://youtu.be/3vJ-nHTX9iI'),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => YoutubePlayVideoScreen(videoUrl:'https://youtu.be/vJsbt6X1keQ' ),));
             },
             child: Container(
               height: MediaQuery.of(context).size.height*0.2,
