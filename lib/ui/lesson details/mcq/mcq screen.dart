@@ -12,14 +12,11 @@ class McqScreen extends StatefulWidget {
 
 class _McqScreenState extends State<McqScreen> {
   late InAppWebViewController _webViewController;
-  final String _formUrl = 'https://fxcit0a6o87.typeform.com/to/N3n4oKYi';
+  final String _formUrl = 'https://mr-ashraf-abed.hwnix.com/AssignmentsPage2/8';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Google Form'),
-      ),
       body: Column(
         children: [
           Expanded(

@@ -23,7 +23,6 @@ class LessonWedget extends StatelessWidget {
          )
        ],
          color: Colors.white
-       // color: Colors.deepOrange,
       ),
       child: Row(
         children: [

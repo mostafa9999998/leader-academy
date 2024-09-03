@@ -41,7 +41,13 @@ dependencies:
   flutter_pdfview: ^1.2.3
   internet_file: ^1.2.0
   device_info_plus: ^9.1.2
+  provider: ^6.1.2
+  flutter_image_slideshow: ^0.1.6
+  dropdown_button2: ^2.3.9
+  flutter_windowmanager: ^0.2.0
 
+flutter_native_splash:
+  background_image: "assets/images/splash_screen.png"
 
 dev_dependencies:
   flutter_test:

@@ -17,12 +17,7 @@ class Textform extends StatelessWidget {
         Text(title,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),),
         Container(
           child: TextFormField(
-            validator: validator
-            /*(value) {
-              if (value!.isEmpty || value.trim().isEmpty){
-                return valiedstring;
-              }
-            },*/,
+            validator: validator,
             keyboardType:keyboardtype ,
             decoration: InputDecoration(
                 errorBorder:  OutlineInputBorder(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leader_academy/ui/materials/materials%20screen.dart';
+import 'package:leader_academy/ui/master%20screen/master%20screen.dart';
 import '../register/register_screen.dart';
 import '../register/textfield_pass.dart';
 import '../register/textfirld_wedget.dart';
@@ -75,7 +75,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     height:MediaQuery.sizeOf(context).width*0.15 ,
                     child: ElevatedButton(onPressed: (){
                      // login();
-                      Navigator.pushReplacementNamed(context, MaterialsScreen.MaterialsScreenname);
+                      Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
                     },
                       child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
                       style: ElevatedButton.styleFrom(

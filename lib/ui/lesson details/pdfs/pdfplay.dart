@@ -56,19 +56,6 @@ InternetFile.get(widget.Pdhurl)
           errorBuilder: (_,error)=> Center(child: Text(error.toString(),style: TextStyle(color: Colors.cyanAccent),),)
         ),
       )
-
-      // Column(
-      //   children: [
-          //Expanded(
-            // child: InAppWebView(
-            //   initialUrlRequest: URLRequest(url: WebUri(_formUrl)),
-            //   onWebViewCreated: (controller) {
-            //     _webViewController = controller;
-            //   },
-            // ),
-          // ),
-      //   ],
-      // ),
     );
   }
 }

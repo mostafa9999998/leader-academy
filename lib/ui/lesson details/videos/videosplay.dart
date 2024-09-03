@@ -1,58 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter/services.dart';
 
-class YoutubePlayVideoScreen extends StatefulWidget {
-  YoutubePlayVideoScreen({super.key,required this.videoUrl});
+
+class PlayVideoScreen extends StatefulWidget {
+  PlayVideoScreen({super.key});
   static const String YoutubePlayVideoScreenname = 'YoutubePlayVideoScreen';
-  String videoUrl ;
+  //String videoUrl ;
   @override
-  _YoutubePlayVideoScreenState createState() => _YoutubePlayVideoScreenState();
+  _PlayVideoScreenState createState() => _PlayVideoScreenState();
 }
 
-class _YoutubePlayVideoScreenState extends State<YoutubePlayVideoScreen> {
-  late YoutubePlayerController _controller;
-  //final String _videoUrl = 'https://youtu.be/3vJ-nHTX9iI';
+class _PlayVideoScreenState extends State<PlayVideoScreen> {
 
   @override
   void initState() {
     super.initState();
-    _setupYoutubePlayer(widget.videoUrl);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+
+    ]);
   }
 
-  void _setupYoutubePlayer(String s ) {
-    final videoId = YoutubePlayer.convertUrlToId(s);
-    _controller = YoutubePlayerController(
-      initialVideoId: videoId ?? '',
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
+
+
+  late InAppWebViewController _webViewController;
+
+  final String _formUrl = 'https://drive.google.com/file/d/114akduJUfIzbCglBb7NDkj-4erwUeBaZ/preview';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Google Drive Video'),
-      // ),
       body: Column(
         children: [
           Expanded(
-            child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Colors.blueAccent,
+            child: InAppWebView(
+              initialUrlRequest: URLRequest(url: WebUri(_formUrl)),
+              onWebViewCreated: (controller) {
+                _webViewController = controller;
+              },
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
+import 'package:leader_academy/ui/utiles/loading.dart';
 
 class MaterialWedget extends StatelessWidget {
    MaterialWedget({super.key,required this.materialmodel});
@@ -27,6 +28,7 @@ class MaterialWedget extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
+              showcodefield(context, 'code message');
             },
             child: Container(
               decoration: BoxDecoration(

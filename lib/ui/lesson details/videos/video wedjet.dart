@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leader_academy/ui/lesson%20details/videos/videosplay.dart';
-//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class VideoWedget extends StatefulWidget {
    VideoWedget({super.key,required this.materialmodel});
@@ -11,25 +10,6 @@ class VideoWedget extends StatefulWidget {
 }
 
 class _VideoWedgetState extends State<VideoWedget> {
-  // late YoutubePlayerController _controller;
-  // final String _videoUrl = 'https://youtu.be/3vJ-nHTX9iI';
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _setupYoutubePlayer();
-  // }
-  //
-  // void _setupYoutubePlayer() {
-  //   final videoId = YoutubePlayer.convertUrlToId(_videoUrl);
-  //   _controller = YoutubePlayerController(
-  //     initialVideoId: videoId ?? '',
-  //     flags: const YoutubePlayerFlags(
-  //       autoPlay: false,
-  //       mute: false,
-  //     ),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
 
@@ -51,7 +31,7 @@ class _VideoWedgetState extends State<VideoWedget> {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => YoutubePlayVideoScreen(videoUrl:widget.materialmodel.url ),));
+             // Navigator.push(context, MaterialPageRoute(builder: (context) => PlayVideoScreen(videoUrl:widget.materialmodel.url ),));
             },
             child: Container(
               height: MediaQuery.of(context).size.height*0.2,
@@ -63,13 +43,6 @@ class _VideoWedgetState extends State<VideoWedget> {
                   fit: BoxFit.fill
                 )
               ),
-              // child: Expanded(
-              //   child: YoutubePlayer(
-              //     controller: _controller,
-              //     showVideoProgressIndicator: true,
-              //     progressIndicatorColor: Colors.blueAccent,
-              //   ),
-              // ),
             ),
           ),
 

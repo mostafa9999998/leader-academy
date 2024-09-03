@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:leader_academy/ui/register/textfield_pass.dart';
 import 'package:leader_academy/ui/register/textfirld_wedget.dart';
@@ -17,6 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController namecontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
+  late String selectedyear;
+  List<String> yearslist = [ 'one','two','three','mooo','mooo0.'];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -32,20 +35,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                  children: [
-                   SizedBox(height:  MediaQuery.of(context).size.height*.12,),
+                   SizedBox(height:  MediaQuery.of(context).size.height*.05,),
                    Center(child: Container(
                        height: MediaQuery.of(context).size.height*.1,
                        width: MediaQuery.of(context).size.width*.99,
                        child: Image(image:AssetImage('assets/images/logoappp.png'),fit: BoxFit.fill,))),
-                   SizedBox(height:  MediaQuery.of(context).size.height*.08,),
-                   Textform(title: 'Full Name', hint: 'name',controller: namecontroller,
+                   SizedBox(height:  MediaQuery.of(context).size.height*.02,),
+
+
+                   Textform(title: 'First Name', hint: 'Mohamed',controller: namecontroller,
                    validator: (value) {
                      if (value!.isEmpty || value.trim().isEmpty){
                        return "your name can't be empty";
                      }
                    },),
-
-
+                   Textform(title: 'Last Name', hint: 'Hussien',controller: namecontroller,
+                   validator: (value) {
+                     if (value!.isEmpty || value.trim().isEmpty){
+                       return "your last name can't be empty";
+                     }
+                   },),
                    Textform(title: 'Phone number', hint: 'phone number',
                        keyboardtype: TextInputType.phone,controller:phonecontroller ,validator: (value) {
                        if (value!.isEmpty || value.trim().isEmpty){
@@ -56,6 +65,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
                      },),
                    Textformpass(title: 'Password', hint: 'Your password',iconpath: 'assets/images/eye password logo.png',
                        valiedstring: "password can't be empty",controller: passwordcontroller),
+
+                   Text('Educational Level.',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold ),),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 10 ),
+                     child: DropdownButtonFormField2<String>(
+                       isExpanded: true,
+                       decoration: InputDecoration(
+                         // Add Horizontal padding using menuItemStyleData.padding so it matches
+                         // the menu padding when button's width is not specified.
+                         contentPadding:
+                         const EdgeInsets.symmetric(
+                             vertical: 16),
+                         border: OutlineInputBorder(
+                           borderRadius: BorderRadius.circular(15),
+                         ),
+                         // Add more decoration..
+                       ),
+                       hint: const Text(
+                         'Select Your level',
+                         style: TextStyle(fontSize: 14),
+                       ),
+                       items: yearslist
+                           .map((item) => DropdownMenuItem<String>(
+                         value: item,
+                         child: Text(
+                           item,
+                           style: const TextStyle(
+                             fontSize: 14,
+                           ),
+                         ),
+                       ))
+                           .toList(),
+                       validator: (value) {
+                         if (value == null) {
+                           return 'Please select your level.';
+                         }
+                         return null;
+                       },
+                       onSaved: (value) {
+                         setState(() {
+                           selectedyear = value.toString();
+                         });
+                       },
+                       onChanged: (value) {
+                         setState(() {
+                           selectedyear = value.toString();
+                         });
+                       },
+                       buttonStyleData: const ButtonStyleData(
+                         padding: EdgeInsets.only(right: 8),
+                       ),
+                       iconStyleData: const IconStyleData(
+                         icon: Icon(
+                           Icons.arrow_drop_down,
+                           color: Colors.black45,
+                         ),
+                         iconSize: 24,
+                       ),
+                       dropdownStyleData: DropdownStyleData(
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(15),
+                         ),
+                       ),
+                       menuItemStyleData: const MenuItemStyleData(
+                         padding:
+                         EdgeInsets.symmetric(horizontal: 16),
+                       ),
+                     ),
+                   ),
+
                    SizedBox(height:  MediaQuery.of(context).size.height*.04,),
 
                    Container(
@@ -83,9 +162,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                        },child: Text('  sign in ',style: TextStyle(color: Color(0xff8362D7),fontSize: 18)))
                      ],
                    ),
-                   ElevatedButton(onPressed: () => Navigator.pushReplacementNamed(context,MacAddresScren.MacAddresScrenname),
-                       child: Text('show mack address')
-                   )
+                   // ElevatedButton(onPressed: () => Navigator.pushReplacementNamed(context,MacAddresScren.MacAddresScrenname),
+                   //     child: Text('show mack address')
+                   // )
                  ],
               ),
             ),
