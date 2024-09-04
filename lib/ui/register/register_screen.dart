@@ -1,8 +1,10 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/register/textfield_pass.dart';
 import 'package:leader_academy/ui/register/textfirld_wedget.dart';
 import 'package:leader_academy/ui/testmacaddress.dart';
+import 'package:leader_academy/ui/utiles/loading.dart';
 import '../login/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -19,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
   late String selectedyear;
-  List<String> yearslist = [ 'one','two','three','mooo','mooo0.'];
+  List<String> yearslist = [ 'الصف الاول الثانوي','الصف الثاني الثانوي','الصف الثالث الثانوي'];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -43,18 +45,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                    SizedBox(height:  MediaQuery.of(context).size.height*.02,),
 
 
-                   Textform(title: 'First Name', hint: 'Mohamed',controller: namecontroller,
+                   Textform(title: 'Name', hint: 'Mohamed Hussien',controller: namecontroller,
                    validator: (value) {
                      if (value!.isEmpty || value.trim().isEmpty){
                        return "your name can't be empty";
                      }
                    },),
-                   Textform(title: 'Last Name', hint: 'Hussien',controller: namecontroller,
-                   validator: (value) {
-                     if (value!.isEmpty || value.trim().isEmpty){
-                       return "your last name can't be empty";
-                     }
-                   },),
+                   // Textform(title: 'Last Name', hint: 'Hussien',controller: namecontroller,
+                   // validator: (value) {
+                   //   if (value!.isEmpty || value.trim().isEmpty){
+                   //     return "your last name can't be empty";
+                   //   }
+                   // },),
                    Textform(title: 'Phone number', hint: 'phone number',
                        keyboardtype: TextInputType.phone,controller:phonecontroller ,validator: (value) {
                        if (value!.isEmpty || value.trim().isEmpty){
@@ -141,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                      width: MediaQuery.sizeOf(context).width*0.9,
                       height:MediaQuery.sizeOf(context).width*0.15 ,
                      child: ElevatedButton(onPressed: (){
-                      // register();
+                       register();
                      },
                          child: Text('Sign Up',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
                        style: ElevatedButton.styleFrom(
@@ -174,25 +176,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  // void register() async{
-  //   if (formkey.currentState?.validate()==true){
-  //     try{
-  //     showLoading(context);
-  //     var R = Apimanager.register(namecontroller.text, emailcontroller.text, phonecontroller.text, passwordcontroller.text);
-  //
-  //     if(await R){
-  //       hideLoading(context);
-  //       //showsucsses(context, 'User added successfully');
-  //       Navigator.pushReplacementNamed(context, Loginscreen.loginroutename);
-  //     } else{
-  //       hideLoading(context);
-  //       showerror(context, 'Email already exists');
-  //     }
-  //     }
-  //         catch(e){
-  //           hideLoading(context);
-  //           showerror(context, 'Some thing went wrong');
-  //         }
-  //   }
-  // }
+  void register() async{
+    if (formkey.currentState?.validate()==true){
+      try{
+      showLoading(context);
+      var R = Apimanager.register(namecontroller.text,selectedyear, phonecontroller.text, passwordcontroller.text);
+
+      if(await R){
+        hideLoading(context);
+        //showsucsses(context, 'User added successfully');
+        Navigator.pushReplacementNamed(context, Loginscreen.loginroutename);
+      } else{
+        hideLoading(context);
+        showerror(context, 'Email already exists');
+      }
+      }
+          catch(e){
+            hideLoading(context);
+            showerror(context, 'Some thing went wrong');
+            // showerror(context,e.toString());
+          }
+    }
+  }
+
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersResponse.dart';
 import 'package:leader_academy/ui/materials/materials%20screen.dart';
 import 'package:leader_academy/ui/teacher%20profile/profile%20Screen.dart';
 
 class TeacherWedget extends StatelessWidget {
-   TeacherWedget({super.key,required this.teachermodel});
-   Teachermodel teachermodel ;
+   TeacherWedget({super.key,required this.teacher});
+   //Teachermodel teachermodel ;
+   Teachers teacher ;
   @override
   Widget build(BuildContext context) {
     print( MediaQuery.of(context).size.height*0.3);
@@ -49,17 +51,17 @@ class TeacherWedget extends StatelessWidget {
                 //borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(teachermodel.imgpath)
+                    image: NetworkImage(teacher?.fullSrc??''),
                 ),
               ),
             ),
             SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
-            Center(child: Text(teachermodel.txt1, style: TextStyle(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold,),)),
+            Center(child: Text(teacher.name??'', style: TextStyle(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold,),)),
             SizedBox(height: MediaQuery.of(context).size.height*.01,),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(teachermodel.txt2, style: TextStyle(color: Color(0xff5D5D5D),fontSize: 18,fontWeight: FontWeight.w600),),
+                Text(teacher.subject??'', style: TextStyle(color: Color(0xff5D5D5D),fontSize: 18,fontWeight: FontWeight.w600),),
                 SizedBox(width: MediaQuery.of(context).size.width*.015,),
                 // CircleAvatar(
                 //   child: Image(image:AssetImage(teachermodel.imgpath) ,fit: BoxFit.cover,),
@@ -77,7 +79,7 @@ class TeacherWedget extends StatelessWidget {
                       //borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: AssetImage(teachermodel.imgpath)
+                          image: NetworkImage(teacher.fullSrc??'')
                       ),
                     ),
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:leader_academy/ui/materials%20lessons/lesson%20container.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/materials%20lessons/lesson%20wedjet.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
 
@@ -51,13 +51,51 @@ class MaterialsLessonScreen extends StatelessWidget {
             // Container(
             //     height: MediaQuery.of(context).size.height*0.2,
             //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
-            Expanded(
-              child: ListView.builder(itemBuilder: (context, index) {
-                return LessonWedget(materialmodel: materialmodellist[index]);
+            FutureBuilder(
+              future: Apimanager.getlessons(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return LessonWedget(
+                          lessons: snapshot.data!.lessons![index],
+                        );
+                      },
+                      itemCount: snapshot.data!.lessons!.length,
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text(
+                      'Some thing went wrong',
+                      style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w800),
+                    ),
+                  );
+                } else {
+                  return  Column(
+                    children: [
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                      Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
+                  );
+                }
               },
-                itemCount: materialmodellist.length,
-              ),
             ),
+
+
+
+
+            // Expanded(
+            //   child: ListView.builder(itemBuilder: (context, index) {
+            //     return LessonWedget(materialmodel: materialmodellist[index]);
+            //   },
+            //     itemCount: materialmodellist.length,
+            //   ),
+            // ),
           ],
         ),
       );

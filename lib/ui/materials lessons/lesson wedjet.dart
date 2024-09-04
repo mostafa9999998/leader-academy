@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
 
 class LessonWedget extends StatelessWidget {
-   LessonWedget({super.key,required this.materialmodel});
-  Materiallessonmodel materialmodel ;
+   LessonWedget({super.key,required this.lessons});
+  //Materiallessonmodel materialmodel ;
+   Lessons lessons;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +33,7 @@ class LessonWedget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(materialmodel.txt1, style: TextStyle(color: Colors.black,fontSize: 21,fontWeight: FontWeight.w800),),
+                Text(lessons.title??"", style: TextStyle(color: Colors.black,fontSize: 21,fontWeight: FontWeight.w800),),
                 SizedBox(height:  MediaQuery.of(context).size.height*0.05 ,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +49,7 @@ class LessonWedget extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(materialmodel.txt2,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                            Text('تصفح الان',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                           ],
                         ),
                       ),
@@ -61,7 +63,7 @@ class LessonWedget extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height*0.17,
           width: MediaQuery.of(context).size.width*0.32,
-          child: Image.asset(materialmodel.imgpath,fit: BoxFit.fill,),
+          child: Image.asset('assets/images/test rectangle pic.png',fit: BoxFit.fill,),
                     )
         ],
       ),

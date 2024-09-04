@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/materials/Material%20wedjet.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class MaterialsScreen extends StatelessWidget {
   const MaterialsScreen({super.key});
@@ -24,6 +27,7 @@ class MaterialsScreen extends StatelessWidget {
          txt1: 'الشهر الثانى'),
    ];
 
+   MainProvider provider = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
         leading:InkWell(
@@ -50,13 +54,50 @@ class MaterialsScreen extends StatelessWidget {
                 // Container(
                 //     height: MediaQuery.of(context).size.height*0.2,
                 //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
-                Expanded(
-                  child: ListView.builder(itemBuilder: (context, index) {
-                    return MaterialWedget(materialmodel: materialmodellist[index]);
+                FutureBuilder(
+                  future: Apimanager.getpackages(provider.loginResponse.token!),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return MaterialWedget(
+                              packages: snapshot.data!.packages![index],
+                            );
+                          },
+                          itemCount: snapshot.data!.packages!.length,
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          'Some thing went wrong',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.w800),
+                        ),
+                      );
+                    } else {
+                      return  Column(
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                          Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ],
+                      );
+                    }
                   },
-                    itemCount: materialmodellist.length,
-                  ),
                 ),
+
+
+
+                // Expanded(
+                //   child: ListView.builder(itemBuilder: (context, index) {
+                //     return MaterialWedget(packages: materialmodellist[index]);
+                //   },
+                //     itemCount: materialmodellist.length,
+                //   ),
+                // ),
               ],
             ),
 

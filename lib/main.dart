@@ -19,15 +19,15 @@ import 'package:flutter/services.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  MainProvider provider = MainProvider();
   // Lock the orientation to portrait mode (you can also choose landscape)
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
-    runApp(MyApp());
+    runApp(ChangeNotifierProvider(
+        create: (context) => provider, child: const MyApp()));
   });
-
-  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

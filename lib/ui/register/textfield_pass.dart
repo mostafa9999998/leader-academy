@@ -38,12 +38,12 @@ class _TextformpassState extends State<Textformpass> {
               } else if (value.length < 8) {
                 return 'password shoud be at least 8 Characters';
               }
-              bool emailValid = RegExp(
-                  r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$')
-                  .hasMatch(value);
-              if (!emailValid) {
-                return "Strong Password Format Ex(Join41@)";
-              }
+              // bool emailValid = RegExp(
+              //     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$')
+              //     .hasMatch(value);
+              // if (!emailValid) {
+              //   return "Strong Password Format Ex(Join41@)";
+              // }
             },
             decoration: InputDecoration(
               errorBorder: OutlineInputBorder(

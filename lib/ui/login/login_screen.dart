@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
+import 'package:leader_academy/data/repo/modules/login/LoginResponse.dart';
 import 'package:leader_academy/ui/master%20screen/master%20screen.dart';
+import 'package:leader_academy/ui/utiles/loading.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 import '../register/register_screen.dart';
 import '../register/textfield_pass.dart';
 import '../register/textfirld_wedget.dart';
@@ -74,8 +79,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     width: MediaQuery.sizeOf(context).width*0.9,
                     height:MediaQuery.sizeOf(context).width*0.15 ,
                     child: ElevatedButton(onPressed: (){
-                     // login();
-                      Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
+                      login();
                     },
                       child: Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
                       style: ElevatedButton.styleFrom(
@@ -106,33 +110,36 @@ class _LoginscreenState extends State<Loginscreen> {
     );
   }
 
-  // void login() async {
-  //   if (formk.currentState?.validate()==true){
-  //     try{
-  //       showLoading(context);
-  //       var R = Apimanager.login(emailcontroller.text,passwordcontroller.text);
-  //       LoginResponse loginresponse = await Apimanager.loginresponse(emailcontroller.text,passwordcontroller.text);
-  //           Mainprovider providr = Provider.of<Mainprovider>(context,listen: false);
-  //          providr.fgetuserid(emailcontroller.text,passwordcontroller.text);
-  //       if(await R){
-  //         hideLoading(context);
-  //         providr.setloginid(loginresponse.user!.id!);
-  //         providr.setloginemail(loginresponse.user!.email!);
-  //         providr.setloginname(loginresponse.user!.name!);
-  //         providr.setloginmesage(loginresponse.message!);
-  //         providr.setloginupdated(loginresponse.user!.updatedAt!);
-  //         providr.setlogincreated(loginresponse.user!.createdAt!);
-  //         providr.setloginphone(loginresponse.user!.phone!);
-  //         Navigator.pushReplacementNamed(context, Selectscreen.selectname);
-  //       } else{
-  //         hideLoading(context);
-  //         showerror(context, 'Email or Password is incorrect');
-  //       }
-  //     }
-  //     catch(e){
-  //       hideLoading(context);
-  //       showerror(context, e.toString());
-  //     }
-  //   }
-  // }
+  void login() async {
+    if (formk.currentState?.validate()==true){
+      try{
+        showLoading(context);
+        var R = Apimanager.login(phonecontroller.text,passwordcontroller.text);
+        LoginResponse loginresponse = await Apimanager.loginresponse(phonecontroller.text,passwordcontroller.text);
+            MainProvider providr = Provider.of<MainProvider>(context,listen: false);
+           //providr.fgetuserid(emailcontroller.text,passwordcontroller.text);
+        if(await R){
+          hideLoading(context);
+          providr.loginResponse = loginresponse ;
+          // providr.setloginid(loginresponse.user!.id!);
+          // providr.setloginemail(loginresponse.user!.email!);
+          // providr.setloginname(loginresponse.user!.name!);
+          // providr.setloginmesage(loginresponse.message!);
+          // providr.setloginupdated(loginresponse.user!.updatedAt!);
+          // providr.setlogincreated(loginresponse.user!.createdAt!);
+          // providr.setloginphone(loginresponse.user!.phone!);
+          Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
+        } else{
+          hideLoading(context);
+          showerror(context, 'phone or Password is incorrect');
+        }
+      }
+      catch(e){
+        hideLoading(context);
+        //showerror(context, 'Some thing went wrong');
+        showerror(context, e.toString());
+      }
+    }
+  }
+
 }

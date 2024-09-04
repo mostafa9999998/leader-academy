@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/modules/packages%20list/PackageResponse.dart';
 import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
 import 'package:leader_academy/ui/utiles/loading.dart';
 
 class MaterialWedget extends StatelessWidget {
-   MaterialWedget({super.key,required this.materialmodel});
-  Materialmodel materialmodel ;
+   MaterialWedget({super.key,required this.packages});
+  // Materialmodel materialmodel ;
+   Packages packages;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +17,7 @@ class MaterialWedget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
-          image: AssetImage(materialmodel.imgpath),
+          image: AssetImage('assets/images/test rectangle pic.png'),
           fit: BoxFit.cover,
         )
       ),
@@ -23,7 +25,7 @@ class MaterialWedget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(materialmodel.txt1, style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w800),),
+          Text(packages.title??"", style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w800),),
           SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
           InkWell(
             onTap: () {
@@ -39,7 +41,7 @@ class MaterialWedget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(materialmodel.txt2,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                  Text('تصفح الان',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                 ],
               ),
             ),

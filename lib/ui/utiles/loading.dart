@@ -27,7 +27,7 @@ void showerror(BuildContext context,String errormessage,){
     barrierDismissible: false,
     builder: (context) {
       return  AlertDialog(
-        title:Text('Error!') ,
+        title:Text('Ops!') ,
         content: Text(errormessage) ,
         actions: [
           TextButton(onPressed: () {
