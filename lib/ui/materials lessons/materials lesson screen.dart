@@ -3,27 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/materials%20lessons/lesson%20wedjet.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class MaterialsLessonScreen extends StatelessWidget {
   const MaterialsLessonScreen({super.key});
   static const String MateriallessonScreenname ='MaterialsLessonScreen';
   @override
   Widget build(BuildContext context) {
-    List<Materiallessonmodel> materialmodellist = [
-      Materiallessonmodel(txt2:'تصفح الان' ,
-          imgpath:'assets/images/test rectangle pic.png' ,
-          txt1: 'المحاضره الاولى '),
-      Materiallessonmodel(txt2:'تصفح الان' ,
-          imgpath:'assets/images/test rectangle pic.png' ,
-          txt1: 'المحاضره الثانية'),
-      Materiallessonmodel(txt2:'تصفح الان' ,
-          imgpath:'assets/images/test rectangle pic.png' ,
-          txt1: 'المحاضره الثالثه'),
-      Materiallessonmodel(txt2:'تصفح الان' ,
-          imgpath:'assets/images/test rectangle pic.png' ,
-          txt1: 'المحاضره الرابعة'),
-    ];
 
+    MainProvider mainProvider = Provider.of(context);
 
     return Scaffold(
      appBar: AppBar(
@@ -52,7 +41,7 @@ class MaterialsLessonScreen extends StatelessWidget {
             //     height: MediaQuery.of(context).size.height*0.2,
             //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
             FutureBuilder(
-              future: Apimanager.getlessons(),
+              future: Apimanager.getlessons(mainProvider.packageid),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Expanded(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class LessonWedget extends StatelessWidget {
    LessonWedget({super.key,required this.lessons});
@@ -10,6 +12,7 @@ class LessonWedget extends StatelessWidget {
    Lessons lessons;
   @override
   Widget build(BuildContext context) {
+    MainProvider mainProvider = Provider.of(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal:  MediaQuery.of(context).size.width*.02,vertical: MediaQuery.of(context).size.height*0.03 ),
       height: MediaQuery.of(context).size.height*0.2,
@@ -39,7 +42,10 @@ class LessonWedget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     InkWell(
-                      onTap:  () => Navigator.pushNamed(context, LessonDetailsScreen.LessonDetailsScreenname),
+                      onTap: () {
+                        mainProvider.lessonid = lessons.id!;
+                       Navigator.pushNamed(context, LessonDetailsScreen.LessonDetailsScreenname);
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),

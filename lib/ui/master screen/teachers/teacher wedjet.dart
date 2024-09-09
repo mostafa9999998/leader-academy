@@ -4,6 +4,8 @@ import 'package:flutter/painting.dart';
 import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersResponse.dart';
 import 'package:leader_academy/ui/materials/materials%20screen.dart';
 import 'package:leader_academy/ui/teacher%20profile/profile%20Screen.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class TeacherWedget extends StatelessWidget {
    TeacherWedget({super.key,required this.teacher});
@@ -11,9 +13,10 @@ class TeacherWedget extends StatelessWidget {
    Teachers teacher ;
   @override
   Widget build(BuildContext context) {
-    print( MediaQuery.of(context).size.height*0.3);
+    MainProvider mainProvider =Provider.of(context);
     return InkWell(
       onTap: () {
+        mainProvider.teacherid = teacher.id!;
         Navigator.pushNamed(context, MaterialsScreen.MaterialsScreenname);
       },
       child: Container(
@@ -68,6 +71,7 @@ class TeacherWedget extends StatelessWidget {
                 // ),
                 InkWell(
                   onTap: () {
+                    mainProvider.teacherid = teacher.id!;
                     Navigator.pushNamed(context, ProfileScreen.ProfileScreenname);
                   },
                   child: Container(

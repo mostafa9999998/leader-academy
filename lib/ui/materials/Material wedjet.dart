@@ -3,6 +3,8 @@ import 'package:leader_academy/data/repo/modules/packages%20list/PackageResponse
 import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
 import 'package:leader_academy/ui/utiles/loading.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class MaterialWedget extends StatelessWidget {
    MaterialWedget({super.key,required this.packages});
@@ -10,6 +12,7 @@ class MaterialWedget extends StatelessWidget {
    Packages packages;
   @override
   Widget build(BuildContext context) {
+    MainProvider mainProvider = Provider.of(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal:  MediaQuery.of(context).size.width*.03,vertical: MediaQuery.of(context).size.height*0.03 ),
       height: MediaQuery.of(context).size.height*0.23,
@@ -29,6 +32,7 @@ class MaterialWedget extends StatelessWidget {
           SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
           InkWell(
             onTap: () {
+             mainProvider.packageid = packages.id!;
               Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
               showcodefield(context, 'code message');
             },

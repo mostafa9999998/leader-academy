@@ -4,9 +4,14 @@ import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.
 import 'package:leader_academy/data/repo/modules/login/LoginBody.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginResponse.dart';
 import 'package:leader_academy/data/repo/modules/packages%20list/PackageResponse.dart';
+import 'package:leader_academy/data/repo/modules/packages%20subsciption/PackageSubscription.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterBody.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterResponse.dart';
+import 'package:leader_academy/data/repo/modules/teacher%20profile/TeacherProfile.dart';
 import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersResponse.dart';
+import 'package:leader_academy/data/repo/modules/validate%20code/ValidateCodeBody.dart';
+import 'package:leader_academy/data/repo/modules/validate%20code/ValidateCodeResponse.dart';
+import 'package:leader_academy/data/repo/modules/video/VideoResponse.dart';
 
 class Apimanager {
  // late final userid;
@@ -23,6 +28,22 @@ class Apimanager {
     var response = await post(url, body: loginBody.toJson());
 
     var b = LoginResponse.fromJson(jsonDecode(response.body));
+    return b;
+  }
+
+
+  static Future<ValidateCodeResponse> validatecode(
+      String userId, String code,String lessonId, String macAddress2) async {
+    Uri url = Uri.parse("$apikey/api/codes/validate/mobile");
+    ValidateCodeBody validateCodeBody = ValidateCodeBody(
+      userId: userId,
+      code: code,
+      lessonId: lessonId,
+      macAddress2: macAddress2
+    );
+    var response = await post(url, body: validateCodeBody.toJson());
+
+    var b = ValidateCodeResponse.fromJson(jsonDecode(response.body));
     return b;
   }
 
@@ -69,23 +90,32 @@ class Apimanager {
   }
 
 
-  static Future<TeachersResponse> getteachers(String token) async {
+  static Future<TeachersResponse> getteachers(String token, int edulevel) async {
     try {
-      Uri url = Uri.parse("$apikey/api/teacher/educational-level/1");
+      Uri url = Uri.parse("$apikey/api/teacher/educational-level/$edulevel");
       Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
-      print(response.body[0]);
       Map json = jsonDecode(response.body);
       TeachersResponse teachersResponse = TeachersResponse.fromJson(json);
-        return teachersResponse;
+      return teachersResponse;
+      // if (teachersResponse.teachers == null){
+      //   teachersResponse.teachers = [];
+      //   return teachersResponse;
+      // } else{
+      //  // print(packagesSubscription.validPackages?.length);
+      //   return teachersResponse;
+      // }
+
+      // print(teachersResponse.teachers?.length);
+      //   return teachersResponse;
 
     } catch (e) {
       throw e;
     }
   }
 
-  static Future<PackageResponse> getpackages(String token) async {
+  static Future<PackageResponse> getpackages(String token,int teacherid,int edulevel) async {
     try {
-      Uri url = Uri.parse("$apikey/api/getPackages/1/3");
+      Uri url = Uri.parse("$apikey/api/getPackages/$teacherid/$edulevel");
       Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
       print(response.body[0]);
       Map json = jsonDecode(response.body);
@@ -97,9 +127,9 @@ class Apimanager {
     }
   }
 
-  static Future<LessonsResponse> getlessons() async {
+  static Future<LessonsResponse> getlessons(int packageid) async {
     try {
-      Uri url = Uri.parse("$apikey/api/getlessons/2");
+      Uri url = Uri.parse("$apikey/api/getlessons/$packageid");
       Response response = await get(url);
       print(response.body[0]);
       Map json = jsonDecode(response.body);
@@ -110,5 +140,56 @@ class Apimanager {
       throw e;
     }
   }
+
+
+  static Future<List<VideoResponse>> getvideo(String token,int lessonid) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/videos/lesson/$lessonid");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      List<dynamic> jsonResponse = jsonDecode(response.body);
+      List<VideoResponse> videoResponse =
+      jsonResponse.map((json) => VideoResponse.fromJson(json)).toList();
+      return videoResponse;
+      // VideoResponse videoResponse = VideoResponse.fromJson(json);
+      // return videoResponse;
+
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<TeacherProfile> getteacherprofile(String token,int teacherid) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/getteacher/$teacherid");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      Map json = jsonDecode(response.body);
+      TeacherProfile teacherProfile = TeacherProfile.fromJson(json);
+      return teacherProfile;
+
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<PackageSubscription> getpackagessubscription(String token,int userid) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/get/packages/$userid");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      Map json = jsonDecode(response.body);
+      PackageSubscription packagesSubscription = PackageSubscription.fromJson(json);
+      if (packagesSubscription.message == 'No valid lessons found for this user.'){
+        packagesSubscription.validPackages = [];
+        return packagesSubscription;
+      } else{
+        print(packagesSubscription.validPackages?.length);
+        return packagesSubscription;
+      }
+
+
+    } catch (e) {
+      throw e;
+    }
+  }
+
 
  }

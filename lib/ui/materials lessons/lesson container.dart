@@ -30,35 +30,35 @@ class LessonContainer extends StatelessWidget {
               // Container(
               //     height: MediaQuery.of(context).size.height*0.2,
               //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
-              FutureBuilder(
-                future: Apimanager.getlessons(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return LessonWedget(
-                            lessons: snapshot.data!.lessons![index],
-                          );
-                        },
-                        itemCount: snapshot.data!.lessons!.length,
-                      ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        'Some thing went wrong',
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w800),
-                      ),
-                    );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
+              // FutureBuilder(
+              //   future: Apimanager.getlessons(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       return Expanded(
+              //         child: ListView.builder(
+              //           itemBuilder: (context, index) {
+              //             return LessonWedget(
+              //               lessons: snapshot.data!.lessons![index],
+              //             );
+              //           },
+              //           itemCount: snapshot.data!.lessons!.length,
+              //         ),
+              //       );
+              //     } else if (snapshot.hasError) {
+              //       return Center(
+              //         child: Text(
+              //           'Some thing went wrong',
+              //           style: TextStyle(
+              //               fontSize: 22, fontWeight: FontWeight.w800),
+              //         ),
+              //       );
+              //     } else {
+              //       return Center(
+              //         child: CircularProgressIndicator(),
+              //       );
+              //     }
+              //   },
+              // ),
 
 
               // Expanded(

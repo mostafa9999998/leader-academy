@@ -9,6 +9,7 @@ class LessonsResponse {
         lessons?.add(Lessons.fromJson(v));
       });
     }
+    else {lessons = [];}
   }
   List<Lessons>? lessons;
 

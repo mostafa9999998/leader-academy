@@ -55,7 +55,7 @@ class MaterialsScreen extends StatelessWidget {
                 //     height: MediaQuery.of(context).size.height*0.2,
                 //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
                 FutureBuilder(
-                  future: Apimanager.getpackages(provider.loginResponse.token!),
+                  future: Apimanager.getpackages(provider.loginResponse.token!,provider.teacherid,provider.loginResponse.user!.educationalLevelId!),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Expanded(

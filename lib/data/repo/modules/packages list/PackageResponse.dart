@@ -9,6 +9,9 @@ class PackageResponse {
         packages?.add(Packages.fromJson(v));
       });
     }
+    else {
+      packages = [];
+    }
   }
   List<Packages>? packages;
 

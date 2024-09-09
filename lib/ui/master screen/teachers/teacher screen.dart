@@ -30,7 +30,8 @@ class TeacherScreen extends StatelessWidget {
     ];
 
     MainProvider provider = Provider.of(context);
-
+print(provider.loginResponse.user!.educationalLevelId!);
+print(provider.loginResponse.token!);
     return Container(
       child: Stack(
         children: [
@@ -119,7 +120,7 @@ class TeacherScreen extends StatelessWidget {
               //     height: MediaQuery.of(context).size.height*0.2,
               //     child: Image.asset('assets/images/logopic..png',fit: BoxFit.fill,)),
               FutureBuilder(
-                future: Apimanager.getteachers(provider.loginResponse.token!),
+                future: Apimanager.getteachers(provider.loginResponse.token!,provider.loginResponse.user!.educationalLevelId!),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Expanded(
@@ -129,7 +130,7 @@ class TeacherScreen extends StatelessWidget {
                             teacher: snapshot.data!.teachers![index],
                           );
                         },
-                        itemCount: snapshot.data!.teachers!.length,
+                        itemCount: snapshot.data!.teachers?.length,
                       ),
                     );
                   } else if (snapshot.hasError) {
