@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/master%20screen/courses/sub%20pacckages%20wedjet.dart';
-import 'package:leader_academy/ui/materials%20lessons/lesson%20container.dart';
 import 'package:leader_academy/view%20model/main%20provider.dart';
 import 'package:provider/provider.dart';
 

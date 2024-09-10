@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/data/repo/modules/packages%20list/PackageResponse.dart';
 import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
@@ -31,10 +32,22 @@ class MaterialWedget extends StatelessWidget {
           Text(packages.title??"", style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w800),),
           SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
           InkWell(
-            onTap: () {
+            onTap: () async {
              mainProvider.packageid = packages.id!;
+              mainProvider.macaddress = await Apimanager.getMacAddress()??'0000';
+            var checkresponse = await Apimanager.checkcode(mainProvider.loginResponse.token!, mainProvider.loginResponse.user!.id!, mainProvider.packageid,mainProvider.macaddress );
+            if (checkresponse.message == "No code found for this user and package."){
+              showcodefield(context, 'enter code.',"code !");
+            }
+            else if (checkresponse.message == "MAC address mismatch."){
+              showcodefield(context,'enter code.', 'MAC address mismatch.');
+            }
+            else if (checkresponse.message == "Code has expired."){
+              showcodefield(context,'enter code.', 'Code has expired.');
+            }
+            else if (checkresponse.message == "User has a valid code."){
               Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
-              showcodefield(context, 'code message');
+            }
             },
             child: Container(
               decoration: BoxDecoration(
@@ -56,9 +69,3 @@ class MaterialWedget extends StatelessWidget {
   }
 }
 
-class Materialmodel{
-  String imgpath='';
-  String txt1='';
-  String txt2 = '';
-  Materialmodel({required this.imgpath,required  this.txt1,required this.txt2});
-}

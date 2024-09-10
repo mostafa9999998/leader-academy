@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/lesson%20details/mcq/mcq%20screen.dart';
-import 'package:leader_academy/ui/lesson%20details/pdfs/pdfplay.dart';
 import 'package:leader_academy/ui/lesson%20details/pdfs/pdfs%20screen.dart';
 import 'package:leader_academy/ui/lesson%20details/videos/videosplay.dart';
 import 'package:leader_academy/ui/lesson%20details/videos/videos%20screen.dart';
@@ -53,7 +52,6 @@ class MyApp extends StatelessWidget {
           McqScreen.McqScreenname : (_) => McqScreen(),
           PlayVideoScreen.YoutubePlayVideoScreenname :(_)=> PlayVideoScreen(),
           PdfsScreen.PdfsScreenname : (_)=> PdfsScreen(),
-          PdfPlayScreen.PdfPlayScreenname :(_) => PdfPlayScreen(Pdhurl: '',),
           MacAddresScren.MacAddresScrenname : (_)=> MacAddresScren(),
           //TeacherScreen.TeacherScreenname : (_)=> TeacherScreen()
           MasterScreen.masterScreenname : (_)=> MasterScreen(),

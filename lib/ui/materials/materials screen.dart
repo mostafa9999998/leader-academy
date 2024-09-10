@@ -12,20 +12,6 @@ class MaterialsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   List<Materialmodel> materialmodellist = [
-     Materialmodel(txt2:'تصفح الان' ,
-     imgpath:'assets/images/test rectangle pic.png' ,
-     txt1: 'الشهر الاول'),
-     Materialmodel(txt2:'تصفح الان' ,
-         imgpath:'assets/images/test rectangle pic.png' ,
-         txt1: 'الشهر الثانى'),
-     Materialmodel(txt2:'تصفح الان' ,
-         imgpath:'assets/images/test rectangle pic.png' ,
-         txt1: 'الشهر الاول'),
-     Materialmodel(txt2:'تصفح الان' ,
-         imgpath:'assets/images/test rectangle pic.png' ,
-         txt1: 'الشهر الثانى'),
-   ];
 
    MainProvider provider = Provider.of(context);
     return Scaffold(
@@ -88,16 +74,6 @@ class MaterialsScreen extends StatelessWidget {
                     }
                   },
                 ),
-
-
-
-                // Expanded(
-                //   child: ListView.builder(itemBuilder: (context, index) {
-                //     return MaterialWedget(packages: materialmodellist[index]);
-                //   },
-                //     itemCount: materialmodellist.length,
-                //   ),
-                // ),
               ],
             ),
 

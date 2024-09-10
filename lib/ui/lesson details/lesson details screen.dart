@@ -28,18 +28,18 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
      Lessondmodel(
        imgpath:'assets/images/test rectangle pic.png' ,
        txt1: 'ملازم',
-       routename:PdfsScreen.PdfsScreenname ,
+       routename:PdfsScreen.PdfsScreenname,
      ),
      Lessondmodel(
          imgpath:'assets/images/test rectangle pic.png' ,
          txt1: 'الواجب',
          routename:McqScreen.McqScreenname
      ),
-     Lessondmodel(
-         imgpath:'assets/images/test rectangle pic.png' ,
-         txt1: 'Quiz',
-         routename:McqScreen.McqScreenname
-     ),
+     // Lessondmodel(
+     //     imgpath:'assets/images/test rectangle pic.png' ,
+     //     txt1: 'Quiz',
+     //     routename:McqScreen.McqScreenname
+     // ),
 
 
 

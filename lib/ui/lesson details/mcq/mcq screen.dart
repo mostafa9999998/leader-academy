@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class McqScreen extends StatefulWidget {
   const McqScreen({super.key});
@@ -12,10 +14,12 @@ class McqScreen extends StatefulWidget {
 
 class _McqScreenState extends State<McqScreen> {
   late InAppWebViewController _webViewController;
-  final String _formUrl = 'https://mr-ashraf-abed.hwnix.com/AssignmentsPage2/8';
 
   @override
   Widget build(BuildContext context) {
+    MainProvider provider = Provider.of(context);
+    final String _formUrl = 'https://mr-ashraf-abed.hwnix.com/AssignmentsPage2/${provider.lessonid}';
+
     return Scaffold(
       body: Column(
         children: [

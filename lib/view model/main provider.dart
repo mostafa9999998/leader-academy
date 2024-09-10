@@ -6,4 +6,5 @@ class MainProvider extends ChangeNotifier{
  late int teacherid;
  late int packageid;
  late int lessonid;
+ late String macaddress;
 }

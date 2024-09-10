@@ -164,9 +164,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                        },child: Text('  sign in ',style: TextStyle(color: Color(0xff8362D7),fontSize: 18)))
                      ],
                    ),
-                   // ElevatedButton(onPressed: () => Navigator.pushReplacementNamed(context,MacAddresScren.MacAddresScrenname),
-                   //     child: Text('show mack address')
-                   // )
                  ],
               ),
             ),

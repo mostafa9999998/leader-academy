@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../fulll.dart';
+import '../mac address.dart';
 
 class MacAddresScren extends StatelessWidget {
   const MacAddresScren({super.key});

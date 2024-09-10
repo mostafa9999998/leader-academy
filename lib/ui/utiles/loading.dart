@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
+import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 //import 'package:motherly_moments/data/repo/apis/baby%20groth/Api%20manager.dart';
 
 //import '../../data/repo/moduls/register/RegisterResponse.dart';
@@ -40,18 +44,19 @@ void showerror(BuildContext context,String errormessage,){
   );
 }
 
-String showcodefield(BuildContext context,String entercodemessage,){
+String showcodefield(BuildContext context,String entercodemessage,String? codemessage,){
   String? code;
   showDialog(context: context,
     barrierDismissible: false,
     builder: (context) {
+    MainProvider provider = Provider.of(context);
       return  AlertDialog(
-        title:Text('Code !') ,
+        title:Text(codemessage??'') ,
         content: Container(
           height: MediaQuery.of(context).size.height*0.08,
           child: Column(
             children: [
-              //Text(entercodemessage),
+              //Text(,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w800),),
               TextFormField(
                 decoration: InputDecoration(
                   hintText: entercodemessage
@@ -64,8 +69,15 @@ String showcodefield(BuildContext context,String entercodemessage,){
           ),
         ) ,
         actions: [
-          TextButton(onPressed: () {
-            Navigator.pop(context);
+          TextButton(onPressed: () async {
+            String macAddress2 = await Apimanager.getMacAddress()??'0000';
+            var validresponse=await Apimanager.validatecode("${provider.loginResponse.user!.id}", code??"", "${provider.packageid}", macAddress2);
+            if (validresponse.message == 'Invalid code.'){
+              showerror(context,"invalid code ");
+            }else{
+              //showsucsses(context,"subscrip successfully");
+              Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
+            }
           },
               child:Text('Ok') )
         ],

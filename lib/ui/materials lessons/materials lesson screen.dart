@@ -75,16 +75,6 @@ class MaterialsLessonScreen extends StatelessWidget {
               },
             ),
 
-
-
-
-            // Expanded(
-            //   child: ListView.builder(itemBuilder: (context, index) {
-            //     return LessonWedget(materialmodel: materialmodellist[index]);
-            //   },
-            //     itemCount: materialmodellist.length,
-            //   ),
-            // ),
           ],
         ),
       );

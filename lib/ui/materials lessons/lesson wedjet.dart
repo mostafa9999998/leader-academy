@@ -76,10 +76,3 @@ class LessonWedget extends StatelessWidget {
     );
   }
 }
-
-class Materiallessonmodel{
-  String imgpath='';
-  String txt1='';
-  String txt2 = '';
-  Materiallessonmodel({required this.imgpath,required  this.txt1,required this.txt2});
-}

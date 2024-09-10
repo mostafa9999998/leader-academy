@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
 
 class MacAddressWidget extends StatefulWidget {
   @override
@@ -26,9 +28,12 @@ class _MacAddressWidgetState extends State<MacAddressWidget> {
 
   @override
   Widget build(BuildContext context) {
+    MainProvider provider = Provider.of(context);
     return FutureBuilder(future:getMacAddress(),
     builder: (context, snapshot) {
+      provider.macaddress = snapshot.data??'00000';
       if (snapshot.hasData){
+        //provider.macaddress = snapshot.data??'00000';
         return Text('MAC Address: ${snapshot.data}');
       }
       else if(snapshot.hasError){

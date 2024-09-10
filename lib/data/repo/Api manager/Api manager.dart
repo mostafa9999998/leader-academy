@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:leader_academy/data/repo/modules/check%20code/CheckCodeResponse.dart';
 import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginBody.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginResponse.dart';
 import 'package:leader_academy/data/repo/modules/packages%20list/PackageResponse.dart';
 import 'package:leader_academy/data/repo/modules/packages%20subsciption/PackageSubscription.dart';
+import 'package:leader_academy/data/repo/modules/pdf/PdfResponse.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterBody.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterResponse.dart';
 import 'package:leader_academy/data/repo/modules/teacher%20profile/TeacherProfile.dart';
@@ -12,6 +14,8 @@ import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersRespons
 import 'package:leader_academy/data/repo/modules/validate%20code/ValidateCodeBody.dart';
 import 'package:leader_academy/data/repo/modules/validate%20code/ValidateCodeResponse.dart';
 import 'package:leader_academy/data/repo/modules/video/VideoResponse.dart';
+import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class Apimanager {
  // late final userid;
@@ -97,21 +101,24 @@ class Apimanager {
       Map json = jsonDecode(response.body);
       TeachersResponse teachersResponse = TeachersResponse.fromJson(json);
       return teachersResponse;
-      // if (teachersResponse.teachers == null){
-      //   teachersResponse.teachers = [];
-      //   return teachersResponse;
-      // } else{
-      //  // print(packagesSubscription.validPackages?.length);
-      //   return teachersResponse;
-      // }
-
-      // print(teachersResponse.teachers?.length);
-      //   return teachersResponse;
-
     } catch (e) {
       throw e;
     }
   }
+
+  static Future<PdfResponse> getpdfs(String token, int lessonid) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/pdfs/lesson/$lessonid");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      Map json = jsonDecode(response.body);
+      PdfResponse pdfResponse = PdfResponse.fromJson(json);
+      return pdfResponse;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
 
   static Future<PackageResponse> getpackages(String token,int teacherid,int edulevel) async {
     try {
@@ -177,13 +184,14 @@ class Apimanager {
       Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
       Map json = jsonDecode(response.body);
       PackageSubscription packagesSubscription = PackageSubscription.fromJson(json);
-      if (packagesSubscription.message == 'No valid lessons found for this user.'){
-        packagesSubscription.validPackages = [];
-        return packagesSubscription;
-      } else{
-        print(packagesSubscription.validPackages?.length);
-        return packagesSubscription;
-      }
+      return packagesSubscription;
+      // if (packagesSubscription.message == 'No valid lessons found for this user.'){
+      //   packagesSubscription.validPackages = [];
+      //   return packagesSubscription;
+      // } else{
+      //   print(packagesSubscription.validPackages?.length);
+      //   return packagesSubscription;
+      // }
 
 
     } catch (e) {
@@ -191,5 +199,29 @@ class Apimanager {
     }
   }
 
+  static Future<String?> getMacAddress() async {
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      return androidInfo.id;
+    } else if (Platform.isIOS) {
+      final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      return iosInfo.identifierForVendor; // Unique device identifier on iOS
+    } else {
+      return null; // MAC address not available for other platforms
+    }
+  }
+
+  static Future<CheckCodeResponse> checkcode(String token, int userid,int packageid, String macaddress) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/code/check/mobile/$userid/$macaddress/$packageid");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      Map json = jsonDecode(response.body);
+      CheckCodeResponse checkCodeResponse = CheckCodeResponse.fromJson(json);
+      return checkCodeResponse;
+    } catch (e) {
+      throw e;
+    }
+  }
 
  }
