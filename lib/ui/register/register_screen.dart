@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/register/textfield_pass.dart';
 import 'package:leader_academy/ui/register/textfirld_wedget.dart';
-import 'package:leader_academy/ui/testmacaddress.dart';
 import 'package:leader_academy/ui/utiles/loading.dart';
 import '../login/login_screen.dart';
 

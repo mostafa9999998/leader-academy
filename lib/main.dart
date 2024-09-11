@@ -10,7 +10,6 @@ import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20scree
 import 'package:leader_academy/ui/materials/materials%20screen.dart';
 import 'package:leader_academy/ui/register/register_screen.dart';
 import 'package:leader_academy/ui/teacher%20profile/profile%20Screen.dart';
-import 'package:leader_academy/ui/testmacaddress.dart';
 import 'package:leader_academy/view%20model/main%20provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -52,8 +51,6 @@ class MyApp extends StatelessWidget {
           McqScreen.McqScreenname : (_) => McqScreen(),
           PlayVideoScreen.YoutubePlayVideoScreenname :(_)=> PlayVideoScreen(),
           PdfsScreen.PdfsScreenname : (_)=> PdfsScreen(),
-          MacAddresScren.MacAddresScrenname : (_)=> MacAddresScren(),
-          //TeacherScreen.TeacherScreenname : (_)=> TeacherScreen()
           MasterScreen.masterScreenname : (_)=> MasterScreen(),
           ProfileScreen.ProfileScreenname : (_) => ProfileScreen()
 

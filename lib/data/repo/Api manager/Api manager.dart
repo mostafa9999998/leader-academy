@@ -46,7 +46,7 @@ class Apimanager {
       macAddress2: macAddress2
     );
     var response = await post(url, body: validateCodeBody.toJson());
-
+    print(response.body.toString());
     var b = ValidateCodeResponse.fromJson(jsonDecode(response.body));
     return b;
   }

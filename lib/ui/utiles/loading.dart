@@ -72,11 +72,19 @@ String showcodefield(BuildContext context,String entercodemessage,String? codeme
           TextButton(onPressed: () async {
             String macAddress2 = await Apimanager.getMacAddress()??'0000';
             var validresponse=await Apimanager.validatecode("${provider.loginResponse.user!.id}", code??"", "${provider.packageid}", macAddress2);
+            print(provider.loginResponse.user!.id);
+            print(code);
+            print(provider.packageid);
+            print( macAddress2);
             if (validresponse.message == 'Invalid code.'){
               showerror(context,"invalid code ");
+            }else  if (validresponse.message == 'Code is already used .'){
+              showerror(context,"Code is already used.");
+            }else if (validresponse.errors!.code![0] == 'The code field is required.'){
+              showerror(context,"The code field is required.");
             }else{
-              //showsucsses(context,"subscrip successfully");
-              Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
+
+              Navigator.pushReplacementNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
             }
           },
               child:Text('Ok') )
