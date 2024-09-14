@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:leader_academy/data/repo/modules/check%20code/CheckCodeResponse.dart';
+import 'package:leader_academy/data/repo/modules/image%20list/ImagesListResponse.dart';
 import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginBody.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginResponse.dart';
@@ -224,4 +225,18 @@ class Apimanager {
     }
   }
 
+
+  static Future<List<ImagesListResponse>> getimagelist(String token) async {
+    try {
+      Uri url = Uri.parse("$apikey/api/images");
+      Response response = await get(url,headers: {'Authorization': 'Bearer $token',});
+      List<dynamic> jsonResponse = jsonDecode(response.body);
+      List<ImagesListResponse> imagesListResponse =
+      jsonResponse.map((json) => ImagesListResponse.fromJson(json)).toList();
+      return imagesListResponse;
+
+    } catch (e) {
+      throw e;
+    }
+  }
  }

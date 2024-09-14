@@ -5,6 +5,9 @@ import 'package:leader_academy/ui/master%20screen/home/home%20screen.dart';
 import 'package:leader_academy/ui/master%20screen/teachers/teacher%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:leader_academy/view%20model/main%20provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -27,13 +30,12 @@ class _MasterScreenState extends State<MasterScreen> {
   }
 
 
-  int currentindex = 2;
   @override
   Widget build(BuildContext context) {
    // MainProvider provider =Provider.of(context);
 
     //int currentindex = provider.currentindex ;
-
+    MainProvider provider = Provider.of(context);
     return WillPopScope(
       onWillPop: ()async {
         return false ;
@@ -41,7 +43,11 @@ class _MasterScreenState extends State<MasterScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading:InkWell(
-            onTap: () => Navigator.pushNamed(context, Loginscreen.loginroutename),
+            onTap: () async{
+              final SharedPreferences x = await SharedPreferences.getInstance();
+              x.remove('login5key');
+              Navigator.pushNamed(context, Loginscreen.loginroutename);
+              },
             child: Row(
               children: [
                 SizedBox(width: MediaQuery.of(context).size.width*0.04,),
@@ -92,13 +98,13 @@ class _MasterScreenState extends State<MasterScreen> {
 
             ],
             onTap: (index) {
-              currentindex = index;
+              provider.currentindex = index;
               setState(() {});
             },
-            currentIndex: currentindex,
+            currentIndex: provider.currentindex,
           ),
         ),
-        body: screens[currentindex],
+        body: screens[provider.currentindex],
       ),
     );
   }

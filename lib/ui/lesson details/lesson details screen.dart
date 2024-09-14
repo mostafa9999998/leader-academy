@@ -21,17 +21,17 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
 
    List<Lessondmodel> materialmodellist = [
      Lessondmodel(
-         imgpath:'assets/images/test rectangle pic.png',
+         imgpath:'assets/images/container square image.png',
          txt1: 'فيديوهات',
          routename: PlayVideoScreen.YoutubePlayVideoScreenname
      ),
      Lessondmodel(
-       imgpath:'assets/images/test rectangle pic.png' ,
+       imgpath:'assets/images/container square image.png' ,
        txt1: 'ملازم',
        routename:PdfsScreen.PdfsScreenname,
      ),
      Lessondmodel(
-         imgpath:'assets/images/test rectangle pic.png' ,
+         imgpath:'assets/images/container square image.png' ,
          txt1: 'الواجب',
          routename:McqScreen.McqScreenname
      ),
@@ -70,7 +70,7 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(image: AssetImage('assets/images/test rectangle pic.png'),
+                  image: DecorationImage(image: AssetImage('assets/images/rectangle with lap image.png'),
                       fit:  BoxFit.fill
                   )
                ),

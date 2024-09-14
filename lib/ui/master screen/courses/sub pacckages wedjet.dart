@@ -23,40 +23,63 @@ class PackagesSubWedget extends StatelessWidget {
         if (snapshot.hasData) {
           return Container(
             padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * .03,
+                horizontal: MediaQuery.of(context).size.width * .06,
                 vertical: MediaQuery.of(context).size.height * 0.03),
             height: MediaQuery.of(context).size.height * 0.23,
             margin: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.05,
                 vertical: MediaQuery.of(context).size.height * 0.005),
+
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 image: DecorationImage(
-                  image: NetworkImage(snapshot.data!.teacher!.image ?? ''),
+                  image: AssetImage('assets/images/techer back grond.png'),
+                  // image: NetworkImage(snapshot.data!.teacher!.image ?? ''),
                   fit: BoxFit.cover,
                 )),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  validPackages.title ?? '',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
-                ),
                 // SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
-                Text(
-                  snapshot.data!.teacher!.name ?? '',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            snapshot.data!.teacher!.image ?? ''
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      snapshot.data!.teacher!.name ?? '',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      validPackages.title ?? '',
+                      style: TextStyle(
+                        color: ColorApp.secondrycolor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
+
                 InkWell(
                   onTap: () async {
                     mainProvider.packageid = validPackages.id!;

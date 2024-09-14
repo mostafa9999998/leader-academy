@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/ui/display%20wedget/display%20wedget.dart';
 import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/lesson%20details/mcq/mcq%20screen.dart';
 import 'package:leader_academy/ui/lesson%20details/pdfs/pdfs%20screen.dart';
@@ -39,8 +40,7 @@ class MyApp extends StatelessWidget {
       create:(context) => mainProvider,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: Loginscreen.loginroutename,
-       // initialRoute: ProfileScreen.ProfileScreenname,
+        initialRoute: DisplayWedget.diplayname,
         routes: {
           Loginscreen.loginroutename : (_) => Loginscreen(),
           RegisterScreen.regroutename :(_) => RegisterScreen(),
@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
           PlayVideoScreen.YoutubePlayVideoScreenname :(_)=> PlayVideoScreen(),
           PdfsScreen.PdfsScreenname : (_)=> PdfsScreen(),
           MasterScreen.masterScreenname : (_)=> MasterScreen(),
-          ProfileScreen.ProfileScreenname : (_) => ProfileScreen()
+          ProfileScreen.ProfileScreenname : (_) => ProfileScreen(),
+          DisplayWedget.diplayname : (_) => DisplayWedget()
 
         },
       ),

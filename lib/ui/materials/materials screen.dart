@@ -55,12 +55,17 @@ class MaterialsScreen extends StatelessWidget {
                         ),
                       );
                     } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          'Some thing went wrong',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w800),
-                        ),
+                      return Column(
+                        children: [
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                          Center(
+                            child: Text(
+                              'Some thing went wrong',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.w800),
+                            ),
+                          ),
+                        ],
                       );
                     } else {
                       return  Column(

@@ -83,7 +83,6 @@ String showcodefield(BuildContext context,String entercodemessage,String? codeme
             }else if (validresponse.errors!.code![0] == 'The code field is required.'){
               showerror(context,"The code field is required.");
             }else{
-
               Navigator.pushReplacementNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
             }
           },

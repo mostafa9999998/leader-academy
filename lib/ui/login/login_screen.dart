@@ -121,13 +121,12 @@ class _LoginscreenState extends State<Loginscreen> {
         if(await R){
           hideLoading(context);
           providr.loginResponse = loginresponse ;
-          // providr.setloginid(loginresponse.user!.id!);
-          // providr.setloginemail(loginresponse.user!.email!);
-          // providr.setloginname(loginresponse.user!.name!);
-          // providr.setloginmesage(loginresponse.message!);
-          // providr.setloginupdated(loginresponse.user!.updatedAt!);
-          // providr.setlogincreated(loginresponse.user!.createdAt!);
-          // providr.setloginphone(loginresponse.user!.phone!);
+          providr.setloginid(loginresponse.user!.id!);
+          providr.setloginname(loginresponse.user!.name!);
+          providr.setloginphone(loginresponse.user!.phone!);
+          providr.setloginlevel(loginresponse.user!.educationalLevelId!);
+          providr.setloginstatus(loginresponse.user!.status!);
+          providr.setlogintoken(loginresponse.token!);
           Navigator.pushReplacementNamed(context, MasterScreen.masterScreenname);
         } else{
           hideLoading(context);
@@ -136,8 +135,8 @@ class _LoginscreenState extends State<Loginscreen> {
       }
       catch(e){
         hideLoading(context);
-        //showerror(context, 'Some thing went wrong');
-        showerror(context, e.toString());
+        showerror(context, 'Some thing went wrong');
+        //showerror(context, e.toString());
       }
     }
   }

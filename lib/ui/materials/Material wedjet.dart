@@ -21,7 +21,7 @@ class MaterialWedget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
-          image: AssetImage('assets/images/test rectangle pic.png'),
+          image: AssetImage('assets/images/rectange 2.png'),
           fit: BoxFit.cover,
         )
       ),
@@ -29,7 +29,7 @@ class MaterialWedget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(packages.title??"", style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w800),),
+          Text(packages.title??"", style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold),),
           SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
           InkWell(
             onTap: () async {
