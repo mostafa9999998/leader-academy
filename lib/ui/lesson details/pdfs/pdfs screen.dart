@@ -46,20 +46,33 @@ class _PdfsScreenState extends State<PdfsScreen> {
       future: Apimanager.getpdfs(provider.loginResponse.token!,provider.lessonid),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: InAppWebView(
-                    initialUrlRequest: URLRequest(url: WebUri(snapshot.data!.pdfs![0].pdf??'')),
-                    onWebViewCreated: (controller) {
-                      _webViewController = controller;
-                    },
+          if (snapshot.data!.message =='No PDFs found for this lesson.'){
+            return Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                 Text('No PDFs found for this lesson.',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),)
+                ],
+              ),
+            );
+          }else{
+            return Scaffold(
+              body: Column(
+                children: [
+                  Expanded(
+                    child: InAppWebView(
+                      initialUrlRequest: URLRequest(url: WebUri(snapshot.data!.pdfs![0].pdf??'')),
+                      // initialUrlRequest: URLRequest(url: WebUri('https://drive.google.com/file/d/11sztTtGr0Fqd-jBcievWZlvXei1Om6wz/view?usp=drivesdk')),
+                      onWebViewCreated: (controller) {
+                        _webViewController = controller;
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          }
+
         } else if (snapshot.hasError) {
           print(provider.lessonid);
           return Scaffold(

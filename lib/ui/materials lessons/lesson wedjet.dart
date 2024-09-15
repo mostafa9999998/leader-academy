@@ -69,7 +69,7 @@ class LessonWedget extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height*0.17,
           width: MediaQuery.of(context).size.width*0.32,
-          child: Image.asset('assets/images/A square image.png',fit: BoxFit.fill,),
+          child: Image.asset('assets/images/container square image.png',fit: BoxFit.fill,),
                     )
         ],
       ),

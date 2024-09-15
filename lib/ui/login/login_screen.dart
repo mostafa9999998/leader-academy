@@ -67,12 +67,13 @@ class _LoginscreenState extends State<Loginscreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  InkWell(
-                    onTap: (){
-                     // Navigator.pushNamed(context, Emailscreen.emailroutename);
-                    },
-                      child: Text('Forget Password?',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20, color: Color(0xff8362D7)),textAlign: TextAlign.end,)),
-                  SizedBox(
+                  // InkWell(
+                  //   onTap: (){
+                  //     // print(phonecontroller.text);
+                  //    // Navigator.pushNamed(context, Emailscreen.emailroutename);
+                  //   },
+                  //     child: Text('Forget Password?',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20, color: Color(0xff8362D7)),textAlign: TextAlign.end,)),
+                   SizedBox(
                     height: 25,
                   ),
                    Container(

@@ -21,7 +21,8 @@ class MaterialWedget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
-          image: AssetImage('assets/images/rectange 2.png'),
+          opacity: 10,
+          image: AssetImage('assets/images/rect student in class.png'),
           fit: BoxFit.cover,
         )
       ),
@@ -29,39 +30,44 @@ class MaterialWedget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(packages.title??"", style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold),),
+          Text(packages.title??"", style: TextStyle(color: Colors.white,fontSize: 32,fontWeight: FontWeight.bold),),
           SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
-          InkWell(
-            onTap: () async {
-             mainProvider.packageid = packages.id!;
-              mainProvider.macaddress = await Apimanager.getMacAddress()??'0000';
-            var checkresponse = await Apimanager.checkcode(mainProvider.loginResponse.token!, mainProvider.loginResponse.user!.id!, mainProvider.packageid,mainProvider.macaddress );
-            if (checkresponse.message == "No code found for this user and package."){
-              showcodefield(context, 'enter code.',"code !");
-            }
-            else if (checkresponse.message == "MAC address mismatch."){
-              showcodefield(context,'enter code.', 'MAC address mismatch.');
-            }
-            else if (checkresponse.message == "Code has expired."){
-              showcodefield(context,'enter code.', 'Code has expired.');
-            }
-            else if (checkresponse.message == "User has a valid code."){
-              Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
-            }
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: ColorApp.secondrycolor,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () async {
+                 mainProvider.packageid = packages.id!;
+                  mainProvider.macaddress = await Apimanager.getMacAddress()??'0000';
+                var checkresponse = await Apimanager.checkcode(mainProvider.loginResponse.token!, mainProvider.loginResponse.user!.id!, mainProvider.packageid,mainProvider.macaddress );
+                if (checkresponse.message == "No code found for this user and package."){
+                  showcodefield(context, 'enter code.',"code !");
+                }
+                else if (checkresponse.message == "MAC address mismatch."){
+                  showcodefield(context,'enter code.', 'MAC address mismatch.');
+                }
+                else if (checkresponse.message == "Code has expired."){
+                  showcodefield(context,'enter code.', 'Code has expired.');
+                }
+                else if (checkresponse.message == "User has a valid code."){
+                  Navigator.pushNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
+                }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: ColorApp.secondrycolor,
+                  ),
+                  width:MediaQuery.of(context).size.width*0.4 ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('تصفح الان',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                    ],
+                  ),
+                ),
               ),
-              width:MediaQuery.of(context).size.width*0.4 ,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('تصفح الان',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                ],
-              ),
-            ),
+            ],
           )
         ],
       ),

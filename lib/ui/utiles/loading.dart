@@ -77,11 +77,11 @@ String showcodefield(BuildContext context,String entercodemessage,String? codeme
             print(provider.packageid);
             print( macAddress2);
             if (validresponse.message == 'Invalid code.'){
-              showerror(context,"invalid code ");
+              showerror(context,"كود غير صالح ! ");
             }else  if (validresponse.message == 'Code is already used .'){
-              showerror(context,"Code is already used.");
+              showerror(context,"هذا الكود مستخدم بالفعل !");
             }else if (validresponse.errors!.code![0] == 'The code field is required.'){
-              showerror(context,"The code field is required.");
+              showerror(context,"ادخل الكود !");
             }else{
               Navigator.pushReplacementNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
             }

@@ -21,17 +21,17 @@ class _LessonDetailsScreenState extends State<LessonDetailsScreen> {
 
    List<Lessondmodel> materialmodellist = [
      Lessondmodel(
-         imgpath:'assets/images/container square image.png',
+         imgpath:'assets/images/aquare video new.png',
          txt1: 'فيديوهات',
          routename: PlayVideoScreen.YoutubePlayVideoScreenname
      ),
      Lessondmodel(
-       imgpath:'assets/images/container square image.png' ,
+       imgpath:'assets/images/aquare video new.png' ,
        txt1: 'ملازم',
        routename:PdfsScreen.PdfsScreenname,
      ),
      Lessondmodel(
-         imgpath:'assets/images/container square image.png' ,
+         imgpath:'assets/images/aquare video new.png' ,
          txt1: 'الواجب',
          routename:McqScreen.McqScreenname
      ),

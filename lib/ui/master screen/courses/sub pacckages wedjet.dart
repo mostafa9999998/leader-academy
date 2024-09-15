@@ -33,7 +33,8 @@ class PackagesSubWedget extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/techer back grond.png'),
+                  opacity: 10,
+                  image: AssetImage('assets/images/rect mob and boy.png'),
                   // image: NetworkImage(snapshot.data!.teacher!.image ?? ''),
                   fit: BoxFit.cover,
                 )),
@@ -43,24 +44,14 @@ class PackagesSubWedget extends StatelessWidget {
               children: [
                 // SizedBox(height:  MediaQuery.of(context).size.height*0.01 ,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            snapshot.data!.teacher!.image ?? ''
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Text(
-                      snapshot.data!.teacher!.name ?? '',
+                      validPackages.title ?? '',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w800),
+                        color: ColorApp.secondrycolor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,),
                     ),
                   ],
                 ),
@@ -68,61 +59,77 @@ class PackagesSubWedget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      validPackages.title ?? '',
+                      snapshot.data!.teacher!.name ?? '',
                       style: TextStyle(
-                        color: ColorApp.secondrycolor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,),
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800),
+                    ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                    Container(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            snapshot.data!.teacher!.image ?? ''
+                        ),
+                      ),
                     ),
                   ],
                 ),
+
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
 
-                InkWell(
-                  onTap: () async {
-                    mainProvider.packageid = validPackages.id!;
-                    mainProvider.macaddress =
-                        await Apimanager.getMacAddress() ?? '0000';
-                    var checkresponse = await Apimanager.checkcode(
-                        mainProvider.loginResponse.token!,
-                        mainProvider.loginResponse.user!.id!,
-                        mainProvider.packageid,
-                        mainProvider.macaddress);
-                    if (checkresponse.message ==
-                        "No code found for this user and package.") {
-                      showcodefield(context, 'enter code.', "");
-                    } else if (checkresponse.message ==
-                        "MAC address mismatch.") {
-                      showcodefield(
-                          context, 'enter code.', 'MAC address mismatch.');
-                    } else if (checkresponse.message == "Code has expired.") {
-                      showcodefield(
-                          context, 'enter code.', 'Code has expired.');
-                    } else if (checkresponse.message ==
-                        "User has a valid code.") {
-                      Navigator.pushNamed(context,
-                          MaterialsLessonScreen.MateriallessonScreenname);
-                    }
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: ColorApp.secondrycolor,
-                    ),
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'تصفح الان',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start ,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        mainProvider.packageid = validPackages.id!;
+                        mainProvider.macaddress =
+                            await Apimanager.getMacAddress() ?? '0000';
+                        var checkresponse = await Apimanager.checkcode(
+                            mainProvider.loginResponse.token!,
+                            mainProvider.loginResponse.user!.id!,
+                            mainProvider.packageid,
+                            mainProvider.macaddress);
+                        if (checkresponse.message ==
+                            "No code found for this user and package.") {
+                          showcodefield(context, 'enter code.', "");
+                        } else if (checkresponse.message ==
+                            "MAC address mismatch.") {
+                          showcodefield(
+                              context, 'enter code.', 'MAC address mismatch.');
+                        } else if (checkresponse.message == "Code has expired.") {
+                          showcodefield(
+                              context, 'enter code.', 'Code has expired.');
+                        } else if (checkresponse.message ==
+                            "User has a valid code.") {
+                          Navigator.pushNamed(context,
+                              MaterialsLessonScreen.MateriallessonScreenname);
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: ColorApp.secondrycolor,
                         ),
-                      ],
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'تصفح الان',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 )
               ],
             ),
