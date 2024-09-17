@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginResponse.dart';
+import 'package:leader_academy/data/repo/modules/search/SearchResponse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class MainProvider extends ChangeNotifier{
  late LoginResponse loginResponse ;
@@ -8,6 +10,7 @@ class MainProvider extends ChangeNotifier{
  late int teacherid;
  late int packageid;
  late int lessonid;
+ List<SearchResponse> teacherlist = [];
  late String macaddress;
  SharedPreferences? prefs;
  static String login_id = 'login1key';
@@ -16,6 +19,13 @@ class MainProvider extends ChangeNotifier{
  static String login_educationleve = 'login4key';
  static String login_statues = 'login5key';
  static String login_token = 'login6key';
+
+ // List<Teachers> get mainlist => _mainlist;
+ //
+ // set mainlist(List<Teachers> newList) {
+ //  _mainlist = newList;
+ //  notifyListeners();
+ // }
 
  Future<void> setloginid(int loginrespons) async {
   await prefs!.setInt(login_id, loginrespons);

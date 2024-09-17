@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersResponse.dart';
+import 'package:leader_academy/data/repo/modules/search/SearchResponse.dart';
 import 'package:leader_academy/ui/materials/materials%20screen.dart';
 import 'package:leader_academy/ui/teacher%20profile/profile%20Screen.dart';
 import 'package:leader_academy/view%20model/main%20provider.dart';
@@ -10,13 +10,13 @@ import 'package:provider/provider.dart';
 class TeacherWedget extends StatelessWidget {
    TeacherWedget({super.key,required this.teacher});
    //Teachermodel teachermodel ;
-   Teachers teacher ;
+   SearchResponse teacher ;
   @override
   Widget build(BuildContext context) {
     MainProvider mainProvider =Provider.of(context);
     return InkWell(
       onTap: () {
-        mainProvider.teacherid = teacher.id!;
+        mainProvider.teacherid = teacher.teacherId!;
         Navigator.pushNamed(context, MaterialsScreen.MaterialsScreenname);
       },
       child: Container(
@@ -47,8 +47,8 @@ class TeacherWedget extends StatelessWidget {
               //width: MediaQuery.of(context).size.width*.4 ,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30)
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20)
                 ),
                 //color: Colors.orange,
                 //borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
@@ -64,14 +64,14 @@ class TeacherWedget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(teacher.subject??'', style: TextStyle(color: Color(0xff5D5D5D),fontSize: 18,fontWeight: FontWeight.w600),),
+                Text(teacher.subject!.subjectName??'', style: TextStyle(color: Color(0xff5D5D5D),fontSize: 18,fontWeight: FontWeight.w600),),
                 SizedBox(width: MediaQuery.of(context).size.width*.015,),
                 // CircleAvatar(
                 //   child: Image(image:AssetImage(teachermodel.imgpath) ,fit: BoxFit.cover,),
                 // ),
                 InkWell(
                   onTap: () {
-                    mainProvider.teacherid = teacher.id!;
+                    mainProvider.teacherid = teacher.teacherId!;
                     Navigator.pushNamed(context, ProfileScreen.ProfileScreenname);
                   },
                   child: Container(

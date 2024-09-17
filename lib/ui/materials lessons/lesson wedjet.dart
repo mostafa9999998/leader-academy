@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/utiles/colors.dart';
+import 'package:leader_academy/ui/utiles/loading.dart';
 import 'package:leader_academy/view%20model/main%20provider.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +44,9 @@ class LessonWedget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     InkWell(
-                      onTap: () {
+                      onTap: () async{
                         mainProvider.lessonid = lessons.id!;
-                       Navigator.pushNamed(context, LessonDetailsScreen.LessonDetailsScreenname);
+                        Navigator.pushNamed(context, LessonDetailsScreen.LessonDetailsScreenname);
                       },
                       child: Container(
                         decoration: BoxDecoration(

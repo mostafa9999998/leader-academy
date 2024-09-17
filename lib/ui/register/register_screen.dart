@@ -20,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
   late String selectedyear;
-  List<String> yearslist = [ 'الصف الاول الثانوي','الصف الثاني الثانوي','الصف الثالث الثانوي'];
+  //List<String> yearslist = [ 'الصف الاول الثانوي','الصف الثاني الثانوي','الصف الثالث الثانوي'];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -68,73 +68,103 @@ class _RegisterScreenState extends State<RegisterScreen> {
                        valiedstring: "password can't be empty",controller: passwordcontroller),
 
                    Text('Educational Level.',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold ),),
-                   Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 10 ),
-                     child: DropdownButtonFormField2<String>(
-                       isExpanded: true,
-                       decoration: InputDecoration(
-                         // Add Horizontal padding using menuItemStyleData.padding so it matches
-                         // the menu padding when button's width is not specified.
-                         contentPadding:
-                         const EdgeInsets.symmetric(
-                             vertical: 16),
-                         border: OutlineInputBorder(
-                           borderRadius: BorderRadius.circular(15),
-                         ),
-                         // Add more decoration..
-                       ),
-                       hint: const Text(
-                         'Select Your level',
-                         style: TextStyle(fontSize: 14),
-                       ),
-                       items: yearslist
-                           .map((item) => DropdownMenuItem<String>(
-                         value: item,
-                         child: Text(
-                           item,
-                           style: const TextStyle(
-                             fontSize: 14,
-                           ),
-                         ),
-                       ))
-                           .toList(),
-                       validator: (value) {
-                         if (value == null) {
-                           return 'Please select your level.';
+                   FutureBuilder(
+                       future: Apimanager.geteducationlevel(),
+                       builder:(context, snapshot) {
+                         if (snapshot.hasData) {
+                           return  Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 10 ),
+                             child: DropdownButtonFormField2<String>(
+                               isExpanded: true,
+                               decoration: InputDecoration(
+                                 // Add Horizontal padding using menuItemStyleData.padding so it matches
+                                 // the menu padding when button's width is not specified.
+                                 contentPadding:
+                                 const EdgeInsets.symmetric(
+                                     vertical: 16),
+                                 border: OutlineInputBorder(
+                                   borderRadius: BorderRadius.circular(15),
+                                 ),
+                                 // Add more decoration..
+                               ),
+                               hint: const Text(
+                                 'Select Your level',
+                                 style: TextStyle(fontSize: 14),
+                               ),
+                               items: snapshot.data!.data!.map((e) => e.name).toList()
+                                   .map((item) => DropdownMenuItem<String>(
+                                 value: item,
+                                 child: Text(
+                                   item??'',
+                                   style: const TextStyle(
+                                     fontSize: 14,
+                                   ),
+                                 ),
+                               ))
+                                   .toList(),
+                               validator: (value) {
+                                 if (value == null) {
+                                   return 'Please select your level.';
+                                 }
+                                 return null;
+                               },
+                               onSaved: (value) {
+                                 setState(() {
+                                   selectedyear = value.toString();
+                                 });
+                               },
+                               onChanged: (value) {
+                                 setState(() {
+                                   selectedyear = value.toString();
+                                 });
+                               },
+                               buttonStyleData: const ButtonStyleData(
+                                 padding: EdgeInsets.only(right: 8),
+                               ),
+                               iconStyleData: const IconStyleData(
+                                 icon: Icon(
+                                   Icons.arrow_drop_down,
+                                   color: Colors.black45,
+                                 ),
+                                 iconSize: 24,
+                               ),
+                               dropdownStyleData: DropdownStyleData(
+                                 decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(15),
+                                 ),
+                               ),
+                               menuItemStyleData: const MenuItemStyleData(
+                                 padding:
+                                 EdgeInsets.symmetric(horizontal: 16),
+                               ),
+                             ),
+                           );
+                         } else if (snapshot.hasError) {
+                           return Column(
+                             children: [
+                               SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                               Center(
+                                 child: Text(
+                                   'Some thing went wrong',
+                                   style: TextStyle(
+                                       fontSize: 22, fontWeight: FontWeight.w800),
+                                 ),
+                               ),
+                             ],
+                           );
+                         } else {
+                           return  Column(
+                             children: [
+                               SizedBox(height: MediaQuery.of(context).size.height * 0.3,),
+                               Center(
+                                 child: CircularProgressIndicator(),
+                               ),
+                             ],
+                           );
                          }
-                         return null;
                        },
-                       onSaved: (value) {
-                         setState(() {
-                           selectedyear = value.toString();
-                         });
-                       },
-                       onChanged: (value) {
-                         setState(() {
-                           selectedyear = value.toString();
-                         });
-                       },
-                       buttonStyleData: const ButtonStyleData(
-                         padding: EdgeInsets.only(right: 8),
-                       ),
-                       iconStyleData: const IconStyleData(
-                         icon: Icon(
-                           Icons.arrow_drop_down,
-                           color: Colors.black45,
-                         ),
-                         iconSize: 24,
-                       ),
-                       dropdownStyleData: DropdownStyleData(
-                         decoration: BoxDecoration(
-                           borderRadius: BorderRadius.circular(15),
-                         ),
-                       ),
-                       menuItemStyleData: const MenuItemStyleData(
-                         padding:
-                         EdgeInsets.symmetric(horizontal: 16),
-                       ),
-                     ),
                    ),
+
 
                    SizedBox(height:  MediaQuery.of(context).size.height*.04,),
 

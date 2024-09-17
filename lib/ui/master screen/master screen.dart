@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
 import 'package:leader_academy/ui/login/login_screen.dart';
 import 'package:leader_academy/ui/master%20screen/courses/courses%20screen.dart';
 import 'package:leader_academy/ui/master%20screen/home/home%20screen.dart';
@@ -32,9 +33,7 @@ class _MasterScreenState extends State<MasterScreen> {
 
   @override
   Widget build(BuildContext context) {
-   // MainProvider provider =Provider.of(context);
 
-    //int currentindex = provider.currentindex ;
     MainProvider provider = Provider.of(context);
     return WillPopScope(
       onWillPop: ()async {
@@ -47,6 +46,7 @@ class _MasterScreenState extends State<MasterScreen> {
               final SharedPreferences x = await SharedPreferences.getInstance();
               x.remove('login5key');
               Navigator.pushNamed(context, Loginscreen.loginroutename);
+              Apimanager.logout(provider.loginResponse.token!);
               },
             child: Row(
               children: [
@@ -97,9 +97,14 @@ class _MasterScreenState extends State<MasterScreen> {
 
 
             ],
-            onTap: (index) {
+            onTap: (index) async {
               provider.currentindex = index;
               setState(() {});
+              if (index ==1){
+                provider.teacherlist = await Apimanager.search( '', provider.loginResponse.user!.educationalLevelId!,provider.loginResponse.token!,);
+                provider.notifyListeners();
+              }
+
             },
             currentIndex: provider.currentindex,
           ),

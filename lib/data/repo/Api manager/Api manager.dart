@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:leader_academy/data/repo/modules/check%20code/CheckCodeResponse.dart';
+import 'package:leader_academy/data/repo/modules/edu%20levels/EducationlevelsResponse.dart';
 import 'package:leader_academy/data/repo/modules/image%20list/ImagesListResponse.dart';
 import 'package:leader_academy/data/repo/modules/lessons%20list/LessonsResponse.dart';
 import 'package:leader_academy/data/repo/modules/login/LoginBody.dart';
@@ -10,6 +11,8 @@ import 'package:leader_academy/data/repo/modules/packages%20subsciption/PackageS
 import 'package:leader_academy/data/repo/modules/pdf/PdfResponse.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterBody.dart';
 import 'package:leader_academy/data/repo/modules/register/RegisterResponse.dart';
+import 'package:leader_academy/data/repo/modules/search/SearchBody.dart';
+import 'package:leader_academy/data/repo/modules/search/SearchResponse.dart';
 import 'package:leader_academy/data/repo/modules/teacher%20profile/TeacherProfile.dart';
 import 'package:leader_academy/data/repo/modules/teachers%20list/TeachersResponse.dart';
 import 'package:leader_academy/data/repo/modules/validate%20code/ValidateCodeBody.dart';
@@ -158,8 +161,7 @@ class Apimanager {
       List<VideoResponse> videoResponse =
       jsonResponse.map((json) => VideoResponse.fromJson(json)).toList();
       return videoResponse;
-      // VideoResponse videoResponse = VideoResponse.fromJson(json);
-      // return videoResponse;
+
 
     } catch (e) {
       throw e;
@@ -186,13 +188,6 @@ class Apimanager {
       Map json = jsonDecode(response.body);
       PackageSubscription packagesSubscription = PackageSubscription.fromJson(json);
       return packagesSubscription;
-      // if (packagesSubscription.message == 'No valid lessons found for this user.'){
-      //   packagesSubscription.validPackages = [];
-      //   return packagesSubscription;
-      // } else{
-      //   print(packagesSubscription.validPackages?.length);
-      //   return packagesSubscription;
-      // }
 
 
     } catch (e) {
@@ -239,4 +234,36 @@ class Apimanager {
       throw e;
     }
   }
+
+  static Future<List<SearchResponse>> search(String name,int level,String token) async {
+    Uri url = Uri.parse("$apikey/api/search/$level");
+    SearchBody searchBody = SearchBody(name: name);
+    var response = await post(url, body: searchBody.toJson(),headers: {'Authorization': 'Bearer $token',});
+    List<dynamic> jsonResponse = jsonDecode(response.body);
+    List<SearchResponse> s =
+    jsonResponse.map((json) => SearchResponse.fromJson(json)).toList();
+    return s;
+
+  }
+
+  static Future<EducationlevelsResponse> geteducationlevel() async {
+    try {
+      Uri url = Uri.parse("$apikey/api/educational-levels");
+      Response response = await get(url);
+      Map json = jsonDecode(response.body);
+      EducationlevelsResponse educationlevelsResponse = EducationlevelsResponse.fromJson(json);
+      return educationlevelsResponse;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+  static void logout(String token) async {
+    Uri url = Uri.parse("$apikey/api/logout");
+    var response = await post(url,headers: {'Authorization': 'Bearer $token',});
+    List<dynamic> jsonResponse = jsonDecode(response.body);
+  }
+
+
  }

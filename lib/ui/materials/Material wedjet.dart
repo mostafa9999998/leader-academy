@@ -39,7 +39,8 @@ class MaterialWedget extends StatelessWidget {
                 onTap: () async {
                  mainProvider.packageid = packages.id!;
                   mainProvider.macaddress = await Apimanager.getMacAddress()??'0000';
-                var checkresponse = await Apimanager.checkcode(mainProvider.loginResponse.token!, mainProvider.loginResponse.user!.id!, mainProvider.packageid,mainProvider.macaddress );
+                var checkresponse = await Apimanager.checkcode(mainProvider.loginResponse.token!,
+                    mainProvider.loginResponse.user!.id!, mainProvider.packageid,mainProvider.macaddress );
                 if (checkresponse.message == "No code found for this user and package."){
                   showcodefield(context, 'enter code.',"code !");
                 }

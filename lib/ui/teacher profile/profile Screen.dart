@@ -144,7 +144,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontSize: 22, fontWeight: FontWeight.w800),
             ),
           );
-        } else {
+        }
+        else {
           return  Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.3,),

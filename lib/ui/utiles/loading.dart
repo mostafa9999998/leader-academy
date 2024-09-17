@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leader_academy/data/repo/Api%20manager/Api%20manager.dart';
+import 'package:leader_academy/ui/lesson%20details/lesson%20details%20screen.dart';
 import 'package:leader_academy/ui/materials%20lessons/materials%20lesson%20screen.dart';
 import 'package:leader_academy/view%20model/main%20provider.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,8 @@ String showcodefield(BuildContext context,String entercodemessage,String? codeme
           ),
         ) ,
         actions: [
-          TextButton(onPressed: () async {
+          TextButton(
+              onPressed: () async {
             String macAddress2 = await Apimanager.getMacAddress()??'0000';
             var validresponse=await Apimanager.validatecode("${provider.loginResponse.user!.id}", code??"", "${provider.packageid}", macAddress2);
             print(provider.loginResponse.user!.id);
@@ -78,12 +80,12 @@ String showcodefield(BuildContext context,String entercodemessage,String? codeme
             print( macAddress2);
             if (validresponse.message == 'Invalid code.'){
               showerror(context,"كود غير صالح ! ");
+            }else  if (validresponse.message == 'Code validated and updated successfully.'){
+              Navigator.pushReplacementNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
             }else  if (validresponse.message == 'Code is already used .'){
               showerror(context,"هذا الكود مستخدم بالفعل !");
             }else if (validresponse.errors!.code![0] == 'The code field is required.'){
               showerror(context,"ادخل الكود !");
-            }else{
-              Navigator.pushReplacementNamed(context, MaterialsLessonScreen.MateriallessonScreenname);
             }
           },
               child:Text('Ok') )
